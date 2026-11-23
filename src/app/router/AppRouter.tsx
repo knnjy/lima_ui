@@ -3,6 +3,7 @@ import LandingPage from '../../features/landing/views/pages/LandingPage';
 import LoginPage from '../../features/authentication/views/pages/LoginPage';
 import RegisterPage from '../../features/authentication/views/pages/RegisterPage';
 import PlaceholderPage from '../../shared/components/PlaceholderPage';
+import { YourFarmsRoute } from '../../features/farm/view/YourFarmsRoute';
 
 export default function AppRouter() {
   return (
@@ -19,7 +20,7 @@ export default function AppRouter() {
 
       {/* Onboarding & authenticated (placeholders for now) */}
       <Route path="/onboarding" element={<PlaceholderPage title="Onboarding" description="First-time account setup flow (placeholder)." />} />
-      <Route path="/home" element={<PlaceholderPage title="My Farms" description="Farm list / home screen (placeholder)." />} />
+      <Route path="/home" element={<YourFarmsRoute />} />
       <Route path="/farms/new" element={<PlaceholderPage title="Add Farm" />} />
       <Route path="/farms/:farmId/dashboard" element={<PlaceholderPage title="Farm Dashboard" />} />
       <Route path="/farms/:farmId/livestock" element={<PlaceholderPage title="Livestock Management" />} />

@@ -13,3 +13,11 @@ export async function signUp(email: string, password: string) {
     },
   });
 }
+
+export async function getCurrentUser() {
+  return supabase.auth.getUser();
+}
+
+export async function signOut() {
+  return supabase.auth.signOut();
+}
