@@ -1,62 +1,50 @@
-import { supabase } from '../../../app/providers/supabase_client';
+import { apiClient } from '../../../app/providers/clients/api_client';
+import { FarmEndpoints } from '../../../app/providers/endpoints/farm_endpoints';
 import type { FarmsGateway } from './yourFarms.types';
+
+interface FarmApiItem {
+  farm_id: string;
+  farm_name: string;
+  created_by: string;
+  province?: string;
+  city_municipality?: string;
+  address_line?: string;
+  is_active?: boolean;
+  created_at?: string;
+  updated_at?: string;
+}
 
 export const supabaseFarmsGateway: FarmsGateway = {
   async getMyFarms() {
-    const { data, error } = await supabase
-      .from('farms')
-      .select('id, name, location, role');
+    const data = await apiClient.get<FarmApiItem[]>(
+      FarmEndpoints.getList,
+    );
 
-    if (error) {
-      throw error;
-    }
-
-    return (data ?? []).map((farm) => ({
-      id: String(farm.id),
-      name: String(farm.name),
-      location: String(farm.location ?? ''),
-      role: farm.role === 'worker' ? 'worker' : 'owner',
+    return data.map((farm) => ({
+      id: String(farm.farm_id),
+      name: String(farm.farm_name),
+      location: [
+        farm.address_line,
+        farm.city_municipality,
+        farm.province,
+      ].filter((part): part is string => Boolean(part)).join(', '),
+      role: 'owner',
     }));
   },
 
   async getPendingInvitations() {
-    const { data, error } = await supabase
-      .from('farm_invitations')
-      .select('id, farm_name, location, invited_by, role, expires_in_days');
-
-    if (error) {
-      throw error;
-    }
-
-    return (data ?? []).map((invitation) => ({
-      id: String(invitation.id),
-      farmName: String(invitation.farm_name),
-      location: String(invitation.location ?? ''),
-      invitedBy: String(invitation.invited_by ?? ''),
-      role: invitation.role === 'worker' ? 'worker' : 'owner',
-      expiresInDays: Number(invitation.expires_in_days ?? 0),
-    }));
+    return [];
   },
 
   async acceptInvitation(invitationId: string) {
-    const { error } = await supabase
-      .from('farm_invitations')
-      .update({ status: 'accepted' })
-      .eq('id', invitationId);
-
-    if (error) {
-      throw error;
-    }
+    await apiClient.post(
+      FarmEndpoints.acceptInvitation(invitationId),
+    );
   },
 
   async declineInvitation(invitationId: string) {
-    const { error } = await supabase
-      .from('farm_invitations')
-      .update({ status: 'declined' })
-      .eq('id', invitationId);
-
-    if (error) {
-      throw error;
-    }
+    await apiClient.post(
+      FarmEndpoints.declineInvitation(invitationId),
+    );
   },
 };
