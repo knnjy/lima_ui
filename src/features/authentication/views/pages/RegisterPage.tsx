@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import {
   Box,
   Button,
@@ -13,50 +12,27 @@ import {
   Checkbox,
 } from '@mui/material';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
-import { Link as RouterLink, useNavigate } from 'react-router-dom';
+import { Link as RouterLink } from 'react-router-dom';
 import AuthLayout from '../../../../app/layout/AuthLayout';
 import { tokens } from '../../../../theme/tokens';
+import { useRegisterViewModel } from '../../viewModel/RegisterUseCase';
 
 export default function RegisterPage() {
-  const navigate = useNavigate();
-  const [fullName, setFullName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-  const [showPassword, setShowPassword] = useState(false);
-  const [agree, setAgree] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setError(null);
-
-    if (!fullName.trim() || !email.trim() || !password || !confirmPassword) {
-      setError('Please fill in all fields.');
-      return;
-    }
-    if (password.length < 8) {
-      setError('Password must be at least 8 characters.');
-      return;
-    }
-    if (password !== confirmPassword) {
-      setError('Passwords do not match.');
-      return;
-    }
-    if (!agree) {
-      setError('You must agree to the terms to continue.');
-      return;
-    }
-
-    setLoading(true);
-    // Placeholder: simulate registration. Real implementation will use Supabase Auth.
-    await new Promise((r) => setTimeout(r, 1100));
-    setLoading(false);
-
-    // After successful registration → onboarding
-    navigate('/onboarding');
-  };
+  const {
+    email,
+    password,
+    confirmPassword,
+    showPassword,
+    agree,
+    loading,
+    error,
+    setEmail,
+    setPassword,
+    setConfirmPassword,
+    setShowPassword,
+    setAgree,
+    handleSubmit,
+  } = useRegisterViewModel();
 
   return (
     <AuthLayout
@@ -69,16 +45,6 @@ export default function RegisterPage() {
             {error}
           </Alert>
         )}
-
-        <TextField
-          fullWidth
-          label="Full name"
-          autoComplete="name"
-          value={fullName}
-          onChange={(e) => setFullName(e.target.value)}
-          sx={{ mb: 2.5 }}
-          InputLabelProps={{ shrink: true }}
-        />
 
         <TextField
           fullWidth
