@@ -1,12 +1,13 @@
 // VIEWMODEL: holds the page state and the actions. No JSX here.
 // The View reads values from this hook and calls its functions, nothing else.
 import { useCallback, useEffect, useState } from "react";
+
 import type {
+  LoadStatus,
+  YourFarmsDeps,
   FarmItem,
   InvitationItem,
-  LoadStatus,
-} from "../model/entities/FarmItem";
-import type { YourFarmsDeps } from "../model/repositories/FarmsRepository";
+} from "../../model/yourFarms.types";
 
 export function useYourFarmsViewModel(deps: YourFarmsDeps) {
   const repository = deps.repository ?? deps.gateway;
@@ -54,13 +55,13 @@ export function useYourFarmsViewModel(deps: YourFarmsDeps) {
         setInvitations((list) => list.filter((i) => i.id !== invitationId));
       } catch {
         setActionError(
-          "We couldn't update this invitation. Check your connection and try again."
+          "We couldn't update this invitation. Check your connection and try again.",
         );
       } finally {
         setBusyIds((ids) => ids.filter((id) => id !== invitationId));
       }
     },
-    [repository]
+    [repository],
   );
 
   return {
