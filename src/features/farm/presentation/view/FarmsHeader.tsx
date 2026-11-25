@@ -17,7 +17,7 @@ export function FarmsHeader({ userName, onCreateFarm }: Props) {
     >
       <div>
         <Typography variant="h4" component="h1" fontWeight={700} color="primary" gutterBottom>
-          Welcome, {userName}, to your farms
+          Welcome {userName}, to your farms
         </Typography>
         <Typography color="text.secondary">
           Choose a farm to open, accept an invitation, or create your own.

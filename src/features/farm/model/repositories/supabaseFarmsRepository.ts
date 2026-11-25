@@ -1,24 +1,15 @@
 import { apiClient } from "../../../../app/providers/clients/api_client";
 import { FarmEndpoints } from "../../../../app/providers/endpoints/farm_endpoints";
-import type { FarmApiItem } from "../entities/FarmItem";
+import { toFarmList, type FarmListApiResponse } from "../entities/FarmItem";
 import type { FarmsRepository } from "./FarmsRepository";
 
 export const supabaseFarmsRepository: FarmsRepository = {
   async getMyFarms() {
-    const data = await apiClient.get<FarmApiItem[]>(
+    const data = await apiClient.get<FarmListApiResponse>(
       FarmEndpoints.getList,
     );
 
-    return data.map((farm) => ({
-      id: String(farm.farm_id),
-      name: String(farm.farm_name),
-      location: [
-        farm.address_line,
-        farm.city_municipality,
-        farm.province,
-      ].filter((part): part is string => Boolean(part)).join(', '),
-      role: 'owner',
-    }));
+    return toFarmList(data).farms;
   },
 
   async getPendingInvitations() {

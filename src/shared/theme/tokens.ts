@@ -39,6 +39,9 @@ export const tokens = {
     lg: 24,
     xl: 32,
   },
+  sizes: {
+    farmCardMinHeight: 150,
+  },
   radius: {
     sm: 3,
     md: 8,
@@ -64,6 +67,10 @@ export const tokens = {
     heroSmall: 36,
     heroMedium: 42,
     heroLarge: 47,
+  },
+  fontWeight: {
+    medium: 500,
+    semibold: 600,
   },
   shadows: {
     card: '0 4px 24px rgba(22, 61, 41, 0.06)',

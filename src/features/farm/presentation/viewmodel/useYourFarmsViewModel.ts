@@ -1,13 +1,9 @@
 // VIEWMODEL: holds the page state and the actions. No JSX here.
 // The View reads values from this hook and calls its functions, nothing else.
 import { useCallback, useEffect, useState } from "react";
+import type { YourFarmsDeps } from "../../model/repositories/FarmsRepository";
+import type { FarmItem, InvitationItem, LoadStatus } from "../../model/entities/FarmItem";
 
-import type {
-  LoadStatus,
-  YourFarmsDeps,
-  FarmItem,
-  InvitationItem,
-} from "../../model/yourFarms.types";
 
 export function useYourFarmsViewModel(deps: YourFarmsDeps) {
   const repository = deps.repository ?? deps.gateway;
