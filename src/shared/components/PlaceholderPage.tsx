@@ -1,6 +1,6 @@
 import { Box, Typography, Button } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
-import { tokens } from '../../theme/tokens';
+import { tokens } from '../theme/tokens';
 
 interface Props {
   title: string;

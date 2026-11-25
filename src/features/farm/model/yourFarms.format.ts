@@ -1,6 +1,6 @@
 // MODEL: small pure helpers that turn data into display text.
 // Easy to unit test because they have no React and no network.
-import type { FarmRole, InvitationItem } from "./yourFarms.types";
+import type { FarmRole, InvitationItem } from "./entities/FarmItem";
 
 const ROLE_LABEL: Record<FarmRole, string> = {
   owner: "Farm owner",

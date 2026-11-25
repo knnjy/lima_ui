@@ -1,8 +1,8 @@
 // Shown when the user already has farms. The design for this state
 // isn't made yet, so this is a simple placeholder list.
 import { Box, Card, CardActionArea, CardContent, Typography } from "@mui/material";
-import type { FarmItem } from "../model/yourFarms.types";
-import { formatRole } from "../model/yourFarms.format";
+import type { FarmItem } from "../../model/entities/FarmItem";
+import { formatRole } from "../../model/yourFarms.format";
 
 
 interface Props {
