@@ -42,12 +42,30 @@ export const tokens = {
   radius: {
     sm: 3,
     md: 8,
-    lg: 3,
+    lg: 13,
     xl: 20,
+    panel: 12,
+    image: 22,
     full: 999,
   },
   fontFamily: {
     body: "'Inter', sans-serif",
     heading: "'Plus Jakarta Sans', sans-serif",
+  },
+  typography: {
+    caption: 12,
+    small: 13,
+    body: 14,
+    subtitle: 15,
+    bodyLarge: 16,
+    cardTitleSmall: 26,
+    cardTitleLarge: 30,
+    logo: 28,
+    heroSmall: 36,
+    heroMedium: 42,
+    heroLarge: 47,
+  },
+  shadows: {
+    card: '0 4px 24px rgba(22, 61, 41, 0.06)',
   },
 } as const;

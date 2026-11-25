@@ -1,13 +1,9 @@
 import { Box, Typography, Button, Link as MuiLink } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
-import { tokens } from '../../../../theme/tokens';
-import farmPhoto from '../../../../assets/landing_hero_image.png';
+import { tokens } from '../../../../shared/theme/tokens';
+import farmPhoto from '../../../../shared/assets/landing_hero_image.png'
 
-/**
- * Landing page faithfully recreated from the provided HTML wireframe.
- * Uses MUI Box for layout while preserving exact visual design, colors,
- * spacing, and hierarchy from the wireframe.
- */
+
 export default function LandingPage() {
   return (
     <Box

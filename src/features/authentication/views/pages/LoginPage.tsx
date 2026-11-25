@@ -1,4 +1,4 @@
-import { useState } from 'react';
+
 import {
   Box,
   Button,
@@ -11,45 +11,41 @@ import {
   CircularProgress,
 } from '@mui/material';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
-import { Link as RouterLink, useNavigate } from 'react-router-dom';
+import { Link as RouterLink } from 'react-router-dom';
 import AuthLayout from '../../../../app/layout/AuthLayout';
-import { tokens } from '../../../../theme/tokens';
+import { tokens } from '../../../../shared/theme/tokens';
+import { useLoginViewModel } from '../../viewModel/LoginUseCase';
 
 export default function LoginPage() {
-  const navigate = useNavigate();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [showPassword, setShowPassword] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setError(null);
-
-    if (!email.trim() || !password) {
-      setError('Please enter both email and password.');
-      return;
-    }
-
-    setLoading(true);
-    // Placeholder: simulate auth call. Real implementation will use Supabase.
-    await new Promise((r) => setTimeout(r, 900));
-    setLoading(false);
-
-    // For now just navigate to home (mock success)
-    // In real flow: check onboarding status → /onboarding or /home
-    navigate('/home');
-  };
+  const {
+    email,
+    password,
+    showPassword,
+    loading,
+    error,
+    setEmail,
+    setPassword,
+    setShowPassword,
+    handleSubmit,
+  } = useLoginViewModel();
 
   return (
+    
     <AuthLayout
-      title="Sign in"
-      subtitle="Welcome back. Manage your farm with LiMa."
+      title="Welcome back"
+      subtitle="Sign in to continue to LiMa."
     >
+      
+      
       <Box component="form" onSubmit={handleSubmit} noValidate>
         {error && (
-          <Alert severity="error" sx={{ mb: 2.5, borderRadius: tokens.radius.sm }}>
+          <Alert
+            severity="error"
+            sx={{
+              mb: 2,
+              borderRadius: tokens.radius.md,
+            }}
+          >
             {error}
           </Alert>
         )}
@@ -58,9 +54,11 @@ export default function LoginPage() {
           fullWidth
           label="Email"
           type="email"
+          placeholder="Enter your email address"
           autoComplete="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
+          required
           sx={{ mb: 2.5 }}
           InputLabelProps={{ shrink: true }}
         />
@@ -69,10 +67,12 @@ export default function LoginPage() {
           fullWidth
           label="Password"
           type={showPassword ? 'text' : 'password'}
+          placeholder="Enter your password"
           autoComplete="current-password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          sx={{ mb: 1 }}
+          required
+          sx={{ mb: 1.5 }}
           InputLabelProps={{ shrink: true }}
           InputProps={{
             endAdornment: (
@@ -113,27 +113,39 @@ export default function LoginPage() {
           sx={{
             height: 52,
             backgroundColor: tokens.colors.primary.main,
-            color: '#FFFFFF',
+            color: tokens.colors.primary.contrast,
             fontWeight: 600,
-            fontSize: 16,
-            borderRadius: tokens.radius.sm,
+            fontSize: 15,
+            borderRadius: tokens.radius.md,
             textTransform: 'none',
-            '&:hover': { backgroundColor: tokens.colors.primary.dark },
-            '&.Mui-disabled': { backgroundColor: tokens.colors.primary.main, opacity: 0.7 },
+            boxShadow: 'none',
+            '&:hover': {
+              backgroundColor: tokens.colors.primary.light,
+              boxShadow: 'none',
+            },
+            '&.Mui-disabled': {
+              backgroundColor: tokens.colors.primary.main,
+              color: tokens.colors.primary.contrast,
+              opacity: 0.7,
+            },
           }}
         >
-          {loading ? <CircularProgress size={24} color="inherit" /> : 'Sign in'}
+          {loading ? (
+            <CircularProgress size={24} color="inherit" />
+          ) : (
+            'Sign in'
+          )}
         </Button>
 
         <Typography
           sx={{
             mt: 3,
             textAlign: 'center',
-            fontSize: 14,
+            fontSize: 13,
             color: tokens.colors.text.secondary,
           }}
         >
-          Don&apos;t have an account?{' '}
+          New to LiMa?{' '}
           <MuiLink
             component={RouterLink}
             to="/register"
@@ -144,7 +156,7 @@ export default function LoginPage() {
               '&:hover': { textDecoration: 'underline' },
             }}
           >
-            Create account
+            Sign up
           </MuiLink>
         </Typography>
       </Box>
