@@ -1,7 +1,7 @@
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
 import { Alert, ButtonBase, Chip, Collapse, List, Paper, Stack, Typography } from "@mui/material";
-import type { InvitationItem } from "../model/yourFarms.types";
+import type { InvitationItem } from "../../model/entities/FarmItem";
 import { InvitationItemRow } from "./InvitationItemRow";
 
 interface Props {

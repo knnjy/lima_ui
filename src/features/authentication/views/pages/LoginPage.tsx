@@ -13,7 +13,7 @@ import {
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { Link as RouterLink } from 'react-router-dom';
 import AuthLayout from '../../../../app/layout/AuthLayout';
-import { tokens } from '../../../../theme/tokens';
+import { tokens } from '../../../../shared/theme/tokens';
 import { useLoginViewModel } from '../../viewModel/LoginUseCase';
 
 export default function LoginPage() {

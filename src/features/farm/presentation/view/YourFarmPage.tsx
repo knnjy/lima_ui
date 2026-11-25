@@ -2,13 +2,13 @@
 // It decides WHAT to show; the child components decide HOW it looks.
 // The header and footer come from AccountLayout, so they are not repeated here.
 import { Alert, Button, CircularProgress, Stack, Typography } from "@mui/material";
-import type { YourFarmsDeps } from "../model/yourFarms.types";
-import { useYourFarmsViewModel } from "../viewmodel/useYourFarmsViewModel";
+import type { YourFarmsDeps } from "../../model/repositories/FarmsRepository";
 import { FarmList } from "./FarmList";
-import { AccountLayout } from "../../../app/layout/Account";
+import { AccountLayout } from "../../../../app/layout/Account";
 import { FarmsHeader } from "./FarmsHeader";
 import { InvitationsPanel } from "./InvitationPanel";
 import { EmptyFarmsState } from "./EmptyFarmState";
+import { useYourFarmsViewModel } from "../viewmodel/useYourFarmsViewModel";
 
 interface Props {
   deps: YourFarmsDeps;

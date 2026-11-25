@@ -5,10 +5,15 @@ import type {
   FarmItem,
   InvitationItem,
   LoadStatus,
-  YourFarmsDeps,
-} from "../model/yourFarms.types";
+} from "../model/entities/FarmItem";
+import type { YourFarmsDeps } from "../model/repositories/FarmsRepository";
 
-export function useYourFarmsViewModel({ gateway, navigate }: YourFarmsDeps) {
+export function useYourFarmsViewModel(deps: YourFarmsDeps) {
+  const repository = deps.repository ?? deps.gateway;
+  if (!repository) {
+    throw new Error("A farm repository or gateway is required.");
+  }
+  const { navigate } = deps;
   const [status, setStatus] = useState<LoadStatus>("loading");
   const [farms, setFarms] = useState<FarmItem[]>([]);
   const [invitations, setInvitations] = useState<InvitationItem[]>([]);
@@ -20,8 +25,8 @@ export function useYourFarmsViewModel({ gateway, navigate }: YourFarmsDeps) {
     setStatus("loading");
     try {
       const [myFarms, pending] = await Promise.all([
-        gateway.getMyFarms(),
-        gateway.getPendingInvitations(),
+        repository.getMyFarms(),
+        repository.getPendingInvitations(),
       ]);
       setFarms(myFarms);
       setInvitations(pending);
@@ -29,7 +34,7 @@ export function useYourFarmsViewModel({ gateway, navigate }: YourFarmsDeps) {
     } catch {
       setStatus("error");
     }
-  }, [gateway]);
+  }, [repository]);
 
   useEffect(() => {
     void load();
@@ -41,10 +46,10 @@ export function useYourFarmsViewModel({ gateway, navigate }: YourFarmsDeps) {
       setBusyIds((ids) => [...ids, invitationId]);
       try {
         if (answer === "accept") {
-          await gateway.acceptInvitation(invitationId);
-          setFarms(await gateway.getMyFarms()); // the new farm shows up in the list
+          await repository.acceptInvitation(invitationId);
+          setFarms(await repository.getMyFarms()); // the new farm shows up in the list
         } else {
-          await gateway.declineInvitation(invitationId);
+          await repository.declineInvitation(invitationId);
         }
         setInvitations((list) => list.filter((i) => i.id !== invitationId));
       } catch {
@@ -55,7 +60,7 @@ export function useYourFarmsViewModel({ gateway, navigate }: YourFarmsDeps) {
         setBusyIds((ids) => ids.filter((id) => id !== invitationId));
       }
     },
-    [gateway]
+    [repository]
   );
 
   return {

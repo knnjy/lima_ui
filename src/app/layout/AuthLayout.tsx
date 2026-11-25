@@ -2,7 +2,7 @@
 import type { ReactNode } from 'react';
 import { Box, Link as MuiLink, Typography } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
-import { tokens } from '../../theme/tokens';
+import { tokens } from '../../shared/theme/tokens';
 
 interface AuthLayoutProps {
   children: ReactNode;

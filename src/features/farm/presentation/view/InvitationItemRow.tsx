@@ -1,6 +1,6 @@
 import { Button, ListItem, Stack, Typography } from "@mui/material";
-import { formatExpiry, formatInvitationMeta } from "../model/yourFarms.format";
-import type { InvitationItem } from "../model/yourFarms.types";
+import { formatExpiry, formatInvitationMeta } from "../../model/yourFarms.format";
+import type { InvitationItem } from "../../model/entities/FarmItem";
 
 interface Props {
   invitation: InvitationItem;

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getCurrentUser, signOut } from '../../authentication/model/auth_model';
-import { supabaseFarmsGateway } from '../model/supabaseFarmsGateway';
+import { getCurrentUser, signOut } from '../../../authentication/model/auth_model';
+import { supabaseFarmsRepository } from '../../model/repositories/supabaseFarmsRepository';
 import { YourFarmsPage } from './YourFarmPage';
 
 export function YourFarmsRoute() {
@@ -41,7 +41,7 @@ export function YourFarmsRoute() {
   return (
     <YourFarmsPage
       deps={{
-        gateway: supabaseFarmsGateway,
+        repository: supabaseFarmsRepository,
         navigate,
       }}
       userName={userName}

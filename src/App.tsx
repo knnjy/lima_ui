@@ -1,7 +1,7 @@
 import { BrowserRouter } from 'react-router-dom';
 import { ThemeProvider, createTheme, CssBaseline } from '@mui/material';
 import AppRouter from './app/router/AppRouter';
-import { tokens } from './theme/tokens';
+import { tokens } from './shared/theme/tokens';
 
 const theme = createTheme({
   palette: {

@@ -3,7 +3,12 @@ import LandingPage from '../../features/landing/views/pages/LandingPage';
 import LoginPage from '../../features/authentication/views/pages/LoginPage';
 import RegisterPage from '../../features/authentication/views/pages/RegisterPage';
 import PlaceholderPage from '../../shared/components/PlaceholderPage';
-import { YourFarmsRoute } from '../../features/farm/view/YourFarmsRoute';
+import { YourFarmsRoute } from '../../features/farm/presentation/view/YourFarmsRoute';
+import { DashboardView } from '../../features/dashboard/presentation/views/DashboardView';
+import { AppLayout } from '../layout/AppLayout';
+import { AnimalView } from '../../features/livestockManagement/animal/presentations/view/AnimalView';
+import { AnimalGroupView } from '../../features/livestockManagement/animalGroup/presentations/view/AnimalGroupView';
+import { LivestockManagementView } from '../../features/livestockManagement/presentations/views/LivestockManagementView';
 
 export default function AppRouter() {
   return (
@@ -22,14 +27,22 @@ export default function AppRouter() {
       <Route path="/onboarding" element={<PlaceholderPage title="Onboarding" description="First-time account setup flow (placeholder)." />} />
       <Route path="/home" element={<YourFarmsRoute />} />
       <Route path="/farms/new" element={<PlaceholderPage title="Add Farm" />} />
-      <Route path="/farms/:farmId/dashboard" element={<PlaceholderPage title="Farm Dashboard" />} />
-      <Route path="/farms/:farmId/livestock" element={<PlaceholderPage title="Livestock Management" />} />
-      <Route path="/farms/:farmId/health-records" element={<PlaceholderPage title="Health Records" />} />
-      <Route path="/farms/:farmId/feed-inventory" element={<PlaceholderPage title="Feed & Inventory" />} />
-      <Route path="/farms/:farmId/sales-expenses" element={<PlaceholderPage title="Sales & Expenses" />} />
-      <Route path="/farms/:farmId/reports" element={<PlaceholderPage title="Reports" />} />
-      <Route path="/farms/:farmId/announcements" element={<PlaceholderPage title="Announcements" />} />
-      <Route path="/farms/:farmId/settings" element={<PlaceholderPage title="Farm Settings" />} />
+      
+      <Route path="/farms/:farmId" element={<AppLayout />}>
+        <Route path="dashboard" element={<DashboardView />} />
+        <Route path="livestock" element={<LivestockManagementView />}>
+          <Route index element={<AnimalView />} />
+          <Route path="animal-groups" element={<AnimalGroupView />} />
+        </Route>
+        <Route path="health-records" element={<DashboardView />} />
+        <Route path="daily-activities" element={<DashboardView/>} />
+        <Route path="feed-inventory" element={<DashboardView/>} />
+        <Route path="sales-expenses" element={<DashboardView/>} />
+        <Route path="ai-insights" element={<DashboardView/>} />
+        <Route path="reports" element={<DashboardView/>} />
+        <Route path="announcements" element={<DashboardView/>} />
+        <Route path="settings" element={<DashboardView/>} />
+      </Route>
       <Route path="/profile" element={<PlaceholderPage title="Profile" />} />
 
       {/* Fallback */}
