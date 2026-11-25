@@ -3,7 +3,7 @@
 // The header and footer come from AccountLayout, so they are not repeated here.
 import { Alert, Button, CircularProgress, Stack, Typography } from "@mui/material";
 import type { YourFarmsDeps } from "../../model/repositories/FarmsRepository";
-import { FarmList } from "./FarmList";
+import { FarmList } from "../components/FarmList";
 import { AccountLayout } from "../../../../app/layout/Account";
 import { FarmsHeader } from "./FarmsHeader";
 import { InvitationsPanel } from "./InvitationPanel";
