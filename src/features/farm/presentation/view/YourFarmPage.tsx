@@ -7,7 +7,7 @@ import { FarmList } from "../components/FarmList";
 import { AccountLayout } from "../../../../app/layout/Account";
 import { FarmsHeader } from "./FarmsHeader";
 import { InvitationsPanel } from "./InvitationPanel";
-import { EmptyFarmsState } from "./EmptyFarmState";
+import { EmptyFarmsState } from "../components/EmptyFarmState";
 import { useYourFarmsViewModel } from "../viewmodel/useYourFarmsViewModel";
 
 interface Props {

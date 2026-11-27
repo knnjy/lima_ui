@@ -19,5 +19,5 @@ export async function getCurrentUser() {
 }
 
 export async function signOut() {
-  return supabase.auth.signOut();
+  return supabase.auth.signOut({ scope: "local" });
 }
