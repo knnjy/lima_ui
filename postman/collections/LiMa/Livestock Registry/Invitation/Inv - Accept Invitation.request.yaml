@@ -1,0 +1,15 @@
+$kind: http-request
+url: "{{api_url}}/invitations/accept"
+method: POST
+body:
+  type: json
+  content: "{\r
+
+    \    \"invitation_token\": \"r9TKEa8cb7RULzYPCC7UE1I0ZFAOw8pBVFx6gRodAF8\"\r
+
+    }"
+auth:
+  type: bearer
+  credentials:
+    token: "{{user2_AT}}"
+order: 4000

@@ -1,0 +1,41 @@
+$kind: http-request
+url: "{{api_url}}/me/animals"
+method: POST
+body:
+  type: json
+  content: "{\r
+
+    \    \"farm_id\": \"22222222-2222-4222-8222-222222222222\",\r
+
+    \    \"species_id\": 1,\r
+
+    \    \"breed_id\": 1,\r
+
+    \    \"animal_group_id\": null,\r
+
+    \    \"identifier_number\": \"F1-SOW-002\",\r
+
+    \    \"name\": \"Maria\",\r
+
+    \    \"sex\": \"female\",\r
+
+    \    \"birth_date\": \"2025-11-03\",\r
+
+    \    \"remarks\": \"Bought together with two other sows\",\r
+
+    \    \"entry\": {\r
+
+    \        \"event_type\": \"purchased\",\r
+
+    \        \"event_date\": \"2026-10-20\",\r
+
+    \        \"remarks\": \"Bought at the Libmanan market\"\r
+
+    \    }\r
+
+    }"
+auth:
+  type: bearer
+  credentials:
+    token: "{{access_token}}"
+order: 3000

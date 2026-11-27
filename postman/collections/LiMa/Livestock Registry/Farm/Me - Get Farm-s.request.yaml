@@ -1,0 +1,9 @@
+$kind: http-request
+name: Me - Get Farm/s
+url: "{{api_url}}/farms"
+method: GET
+auth:
+  type: bearer
+  credentials:
+    token: "{{access_token}}"
+order: 1000

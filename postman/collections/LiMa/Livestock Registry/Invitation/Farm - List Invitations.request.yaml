@@ -1,0 +1,8 @@
+$kind: http-request
+url: "{{api_url}}/farms/22222222-2222-4222-8222-222222222222/invitations"
+method: GET
+auth:
+  type: bearer
+  credentials:
+    token: "{{access_token}}"
+order: 1000

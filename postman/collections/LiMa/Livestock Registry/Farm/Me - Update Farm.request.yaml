@@ -1,0 +1,23 @@
+$kind: http-request
+url: "{{api_url}}/farms/814affc6-ab5f-4018-92e3-699104fe5551"
+method: PATCH
+body:
+  type: json
+  content: "{\r
+
+    \  \"farm_name\": \"Green Valley Farm\",\r
+
+    \  \"province\": \"Laguna\",\r
+
+    \  \"city_municipality\": \"Calamba\",\r
+
+    \  \"address_line\": \"123 Farm Road\",\r
+
+    \  \"is_active\": true\r
+
+    }"
+auth:
+  type: bearer
+  credentials:
+    token: "{{access_token}}"
+order: 4000

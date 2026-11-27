@@ -1,0 +1,21 @@
+$kind: http-request
+url: "{{api_url}}/me/animal-groups/e74c7a54-fde6-4eb2-845a-365d1e687aca"
+method: PATCH
+body:
+  type: json
+  content: "{\r
+
+    \  \"group_name\": \"Herd A - Updated\",\r
+
+    \  \"current_head_count\": 18,\r
+
+    \  \"status\": \"active\",\r
+
+    \  \"remarks\": \"Updated after inventory\"\r
+
+    }"
+auth:
+  type: bearer
+  credentials:
+    token: "{{access_token}}"
+order: 4000

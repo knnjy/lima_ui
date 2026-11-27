@@ -1,0 +1,33 @@
+$kind: http-request
+url: "{{api_url}}/me/animal-groups"
+method: POST
+body:
+  type: json
+  content: "{\r
+
+    \  \"farm_id\": \"e65738fe-d2b0-45c4-aad4-ae6f983873ce\",\r
+
+    \  \"species_id\": 1,\r
+
+    \  \"breed_id\": null,\r
+
+    \  \"group_name\": \"Herd A\",\r
+
+    \  \"sex\": \"mixed\",\r
+
+    \  \"date_established\": \"2026-11-05\",\r
+
+    \  \"initial_head_count\": 20,\r
+
+    \  \"current_head_count\": 20,\r
+
+    \  \"status\": \"active\",\r
+
+    \  \"remarks\": \"Young cattle herd\"\r
+
+    }"
+auth:
+  type: bearer
+  credentials:
+    token: "{{access_token}}"
+order: 3000

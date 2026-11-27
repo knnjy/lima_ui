@@ -1,0 +1,194 @@
+.lima-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  background: rgba(9, 19, 13, 0.48);
+  overflow-y: auto;
+}
+
+.lima-modal {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 680px;
+  max-height: calc(100vh - 32px);
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 36px 40px;
+  background: #ffffff;
+  border-radius: 24px;
+  box-shadow: 0 16px 48px rgba(5, 18, 10, 0.15);
+  font-family: "Inter", sans-serif;
+  outline: none;
+}
+
+.lima-modal__header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.lima-modal__title {
+  flex: 1;
+  margin: 0;
+  font-weight: 700;
+  font-size: 28px;
+  line-height: 1.5;
+  color: #163d29;
+}
+.lima-modal__close {
+  width: 24px;
+  padding: 0;
+  background: none;
+  border: 0;
+  font-size: 26px;
+  line-height: 1.5;
+  text-align: center;
+  color: #626f60;
+  cursor: pointer;
+}
+.lima-modal__subtitle {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #626f60;
+}
+
+/* Privacy / Terms sections */
+.lima-modal__sections {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.lima-modal__section {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.lima-modal__section h3 {
+  margin: 0;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #163d29;
+}
+.lima-modal__section p {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.5;
+  color: #626f60;
+}
+
+.lima-modal__note {
+  padding: 12px 16px;
+  background: #edf3e6;
+  border-radius: 8px;
+  font-size: 13px;
+  line-height: 1.5;
+  color: #626f60;
+}
+
+/* Buttons */
+.lima-btn {
+  box-sizing: border-box;
+  padding: 14px 20px;
+  border-radius: 8px;
+  font-family: inherit;
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 1.5;
+  text-align: center;
+  cursor: pointer;
+}
+.lima-btn--primary {
+  width: 100%;
+  background: #163d29;
+  border: 0;
+  color: #fff;
+}
+.lima-btn--secondary {
+  background: #fff;
+  border: 1px solid #e2e7da;
+  color: #163d29;
+}
+
+/* Contact form */
+.lima-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.lima-form__row {
+  display: flex;
+  gap: 16px;
+}
+.lima-form__row > .lima-field {
+  flex: 1;
+  min-width: 0;
+}
+.lima-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.lima-field label {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #163d29;
+}
+.lima-field input,
+.lima-field textarea {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 13px 16px;
+  background: #fff;
+  border: 1px solid #e2e7da;
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #163d29;
+}
+.lima-field input::placeholder,
+.lima-field textarea::placeholder {
+  color: #626f60;
+}
+.lima-field input:focus,
+.lima-field textarea:focus {
+  outline: none;
+  border-color: #548251;
+}
+.lima-field textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+.lima-form__help {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.5;
+  color: #626f60;
+}
+.lima-form__actions {
+  display: flex;
+  gap: 12px;
+}
+.lima-form__actions .lima-btn {
+  flex: 1;
+}
+
+@media (max-width: 560px) {
+  .lima-modal {
+    padding: 24px 20px;
+  }
+  .lima-modal__title {
+    font-size: 22px;
+  }
+  .lima-form__row {
+    flex-direction: column;
+  }
+}

@@ -1,0 +1,27 @@
+$kind: http-request
+url: "{{api_url}}/me/profile"
+method: POST
+body:
+  type: json
+  content: "{\r
+
+    \  \"first_name\": \"Juan\",\r
+
+    \  \"middle_name\": \"Santos\",\r
+
+    \  \"last_name\": \"Dela Cruz\",\r
+
+    \  \"suffix\": \"Jr.\",\r
+
+    \  \"birth_date\": \"2002-05-15\",\r
+
+    \  \"gender\": \"Male\",\r
+
+    \  \"profile_photo_path\": null\r
+
+    }"
+auth:
+  type: bearer
+  credentials:
+    token: "{{access_token}}"
+order: 2000

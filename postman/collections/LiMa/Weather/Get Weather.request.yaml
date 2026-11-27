@@ -1,0 +1,8 @@
+$kind: http-request
+url: https://api.openweathermap.org/data/2.5/weather?lat=14.5794&lon=121&appid=f3e0412c27e5bfb78d949af04ef763bd
+method: GET
+queryParams:
+  lat: "14.5794"
+  lon: "121"
+  appid: f3e0412c27e5bfb78d949af04ef763bd
+order: 1000

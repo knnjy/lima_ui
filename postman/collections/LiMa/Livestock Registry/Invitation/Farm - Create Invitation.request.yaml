@@ -1,0 +1,19 @@
+$kind: http-request
+url: "{{api_url}}/farms/22222222-2222-4222-8222-222222222222/invitations"
+method: POST
+body:
+  type: json
+  content: "{\r
+
+    \  \"role_id\": 2,\r
+
+    \  \"email\": \"ownertest@gmail.com\",\r
+
+    \  \"expires_at\": \"2026-12-17T16:00:00Z\"\r
+
+    }"
+auth:
+  type: bearer
+  credentials:
+    token: "{{access_token}}"
+order: 2000

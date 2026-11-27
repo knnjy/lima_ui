@@ -1,0 +1,20 @@
+name: LiMa
+values:
+  - key: supabase_url
+    value: ''
+  - key: publishable_key
+    value: ''
+  - key: api_url
+    value: ''
+  - key: email
+    value: ''
+  - key: password
+    value: ''
+  - key: access_token
+    value: ''
+  - key: refresh_token
+    value: ''
+  - key: worker_email
+    value: ''
+  - key: worker_password
+    value: ''

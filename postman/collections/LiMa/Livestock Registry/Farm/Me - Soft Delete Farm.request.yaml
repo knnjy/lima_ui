@@ -1,0 +1,8 @@
+$kind: http-request
+url: "{{api_url}}/farms/814affc6-ab5f-4018-92e3-699104fe5551"
+method: DELETE
+auth:
+  type: bearer
+  credentials:
+    token: "{{access_token}}"
+order: 5000

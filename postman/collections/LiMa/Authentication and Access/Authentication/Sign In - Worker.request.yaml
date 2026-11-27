@@ -1,0 +1,30 @@
+$kind: http-request
+url: "{{supabase_url}}/auth/v1/token?grant_type=password"
+method: POST
+headers:
+  apikey: "{{publishable_key}}"
+  Content-Type: application/json
+queryParams:
+  grant_type: password
+body:
+  type: json
+  content: "{\r
+
+    \  \"email\": \"{{worker_email}}\",\r
+
+    \  \"password\": \"{{worket_password}}\"\r
+
+    }"
+scripts:
+  - type: afterResponse
+    code: "const data = pm.response.json();\r
+
+      if (data.access_token) {\r
+
+      \  pm.environment.set(\"access_token\", data.access_token);\r
+
+      \  pm.environment.set(\"refresh_token\", data.refresh_token);\r
+
+      }"
+    language: text/javascript
+order: 3000

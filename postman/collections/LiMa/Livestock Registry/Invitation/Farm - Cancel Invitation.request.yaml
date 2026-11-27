@@ -1,0 +1,8 @@
+$kind: http-request
+url: "{{api_url}}/farms/22222222-2222-4222-8222-222222222222/invitations/fdac8bd3-2f07-466e-a964-638ff87c8f0a"
+method: POST
+auth:
+  type: bearer
+  credentials:
+    token: "{{access_token}}"
+order: 3000

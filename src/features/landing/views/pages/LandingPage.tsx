@@ -1,7 +1,11 @@
+import { useState } from 'react';
 import { Box, Typography, Button, Link as MuiLink } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
 import { tokens } from '../../../../theme/tokens';
 import farmPhoto from '../../../../assets/landing_hero_image.png';
+import LandingModals, {
+  type LandingModalKey,
+} from '../../../../shared/components/LandingModals';
 
 /**
  * Landing page faithfully recreated from the provided HTML wireframe.
@@ -9,6 +13,21 @@ import farmPhoto from '../../../../assets/landing_hero_image.png';
  * spacing, and hierarchy from the wireframe.
  */
 export default function LandingPage() {
+  const [openModal, setOpenModal] = useState<LandingModalKey>(null);
+
+  const footerLinkSx = {
+    fontSize: 13,
+    lineHeight: 1.5,
+    color: tokens.colors.text.muted,
+    textDecoration: 'none',
+    cursor: 'pointer',
+    background: 'none',
+    border: 0,
+    padding: 0,
+    fontFamily: 'inherit',
+    '&:hover': { textDecoration: 'underline' },
+  };
+
   return (
     <Box
       sx={{
@@ -300,10 +319,14 @@ export default function LandingPage() {
 
         <Box
           sx={{
-            display: 'inline-grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+            display: 'grid',
+            width: '100%',
+            gridTemplateColumns: {
+              xs: '1fr',
+              sm: 'repeat(2, minmax(0, 1fr))',
+              lg: 'repeat(3, minmax(0, 1fr))',
+            },
             gap: 2.5,
-            
           }}
         >
           {[
@@ -552,10 +575,27 @@ export default function LandingPage() {
         <Typography sx={{ fontSize: 13, lineHeight: 1.5, color: tokens.colors.text.muted }}>
           LiMa
         </Typography>
-        <Typography sx={{ fontSize: 13, lineHeight: 1.5, color: tokens.colors.text.muted }}>
-          Privacy · Terms · Contact
-        </Typography>
+        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+          <MuiLink component="button" type="button" onClick={() => setOpenModal('privacy')} sx={footerLinkSx}>
+            Privacy
+          </MuiLink>
+          <Typography component="span" sx={{ fontSize: 13, color: tokens.colors.text.muted }}>
+            ·
+          </Typography>
+          <MuiLink component="button" type="button" onClick={() => setOpenModal('terms')} sx={footerLinkSx}>
+            Terms
+          </MuiLink>
+          <Typography component="span" sx={{ fontSize: 13, color: tokens.colors.text.muted }}>
+            ·
+          </Typography>
+          <MuiLink component="button" type="button" onClick={() => setOpenModal('contact')} sx={footerLinkSx}>
+            Contact
+          </MuiLink>
+        </Box>
       </Box>
+
+      {/* Privacy / Terms / Contact floating windows */}
+      <LandingModals active={openModal} onClose={() => setOpenModal(null)} />
     </Box>
   );
 }

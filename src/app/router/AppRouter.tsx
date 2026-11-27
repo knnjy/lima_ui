@@ -2,6 +2,8 @@ import { Routes, Route } from 'react-router-dom';
 import LandingPage from '../../features/landing/views/pages/LandingPage';
 import LoginPage from '../../features/authentication/views/pages/LoginPage';
 import RegisterPage from '../../features/authentication/views/pages/RegisterPage';
+import AnimalsPage from '../../features/authentication/views/pages/AnimalsPage';
+import AnimalRegistryPage from '../../features/authentication/views/pages/AnimalRegistryPage';
 import PlaceholderPage from '../../shared/components/PlaceholderPage';
 
 export default function AppRouter() {
@@ -9,6 +11,8 @@ export default function AppRouter() {
     <Routes>
       {/* Public */}
       <Route path="/" element={<LandingPage />} />
+      <Route path="/animals" element={<AnimalsPage />} />
+      <Route path="/animal-registry" element={<AnimalRegistryPage />} />
 
       {/* Authentication */}
       <Route path="/login" element={<LoginPage />} />
