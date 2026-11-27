@@ -1,6 +1,7 @@
 // MODEL: small pure helpers that turn data into display text.
 // Easy to unit test because they have no React and no network.
-import type { FarmRole, InvitationItem } from "./entities/FarmItem";
+import type { FarmRole } from "./entities/FarmItem";
+import type { InvitationItem } from "./entities/InvitationItem";
 
 const ROLE_LABEL: Record<FarmRole, string> = {
   owner: "Farm owner",
@@ -8,17 +9,12 @@ const ROLE_LABEL: Record<FarmRole, string> = {
 };
 
 export function formatInvitationMeta(invitation: InvitationItem): string {
-  return [
-    invitation.location,
-    `Invited by ${invitation.invitedBy}`,
-    ROLE_LABEL[invitation.role],
-  ].join("  ·  ");
+  return `Role: ${invitation.role}`;
 }
 
-export function formatExpiry(days: number): string {
-  if (days <= 0) return "Expires today";
-  if (days === 1) return "Expires tomorrow";
-  return `Expires in ${days} days`;
+export function formatExpiry(expiresAt: string): string {
+  const date = new Date(expiresAt);
+  return `Expires ${new Intl.DateTimeFormat(undefined, { dateStyle: "medium" }).format(date)}`;
 }
 
 export function formatRole(role: FarmRole): string {

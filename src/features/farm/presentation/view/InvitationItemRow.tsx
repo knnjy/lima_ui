@@ -1,6 +1,6 @@
 import { Button, ListItem, Stack, Typography } from "@mui/material";
 import { formatExpiry, formatInvitationMeta } from "../../model/yourFarms.format";
-import type { InvitationItem } from "../../model/entities/FarmItem";
+import type { InvitationItem } from "../../model/entities/InvitationItem";
 
 interface Props {
   invitation: InvitationItem;
@@ -24,7 +24,7 @@ export function InvitationItemRow({ invitation, busy, onAccept, onDecline }: Pro
           {formatInvitationMeta(invitation)}
         </Typography>
         <Typography variant="caption" color="text.secondary">
-          {formatExpiry(invitation.expiresInDays)}
+          {formatExpiry(invitation.expiresAt)}
         </Typography>
       </Stack>
 

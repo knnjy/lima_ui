@@ -2,7 +2,12 @@
 // The View reads values from this hook and calls its functions, nothing else.
 import { useCallback, useEffect, useState } from "react";
 import type { YourFarmsDeps } from "../../model/repositories/FarmsRepository";
-import type { FarmItem, InvitationItem, LoadStatus } from "../../model/entities/FarmItem";
+import type { FarmItem, LoadStatus } from "../../model/entities/FarmItem";
+import {
+  InvitationStatus,
+  toInvitationItem,
+  type InvitationItem,
+} from "../../model/entities/InvitationItem";
 
 
 export function useYourFarmsViewModel(deps: YourFarmsDeps) {
@@ -10,6 +15,7 @@ export function useYourFarmsViewModel(deps: YourFarmsDeps) {
   if (!repository) {
     throw new Error("A farm repository or gateway is required.");
   }
+  const { invitationRepository } = deps;
   const { navigate } = deps;
   const [status, setStatus] = useState<LoadStatus>("loading");
   const [farms, setFarms] = useState<FarmItem[]>([]);
@@ -23,15 +29,19 @@ export function useYourFarmsViewModel(deps: YourFarmsDeps) {
     try {
       const [myFarms, pending] = await Promise.all([
         repository.getMyFarms(),
-        repository.getPendingInvitations(),
+        invitationRepository.getPendingInvitations(),
       ]);
       setFarms(myFarms);
-      setInvitations(pending);
+      setInvitations(
+        pending.invitations
+          .filter((invitation) => invitation.status === InvitationStatus.PENDING)
+          .map(toInvitationItem),
+      );
       setStatus("ready");
     } catch {
       setStatus("error");
     }
-  }, [repository]);
+  }, [invitationRepository, repository]);
 
   useEffect(() => {
     void load();

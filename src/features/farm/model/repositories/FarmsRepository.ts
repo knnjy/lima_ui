@@ -1,11 +1,10 @@
 import type {
   FarmItem,
-  InvitationItem,
 } from "../entities/FarmItem";
+import type { InvitationRepository } from "./InvitationRepository";
 
 export interface FarmsRepository {
   getMyFarms(): Promise<FarmItem[]>;
-  getPendingInvitations(): Promise<InvitationItem[]>;
   acceptInvitation(invitationId: string): Promise<void>;
   declineInvitation(invitationId: string): Promise<void>;
 }
@@ -15,5 +14,6 @@ export type FarmsGateway = FarmsRepository;
 export interface YourFarmsDeps {
   repository?: FarmsRepository;
   gateway?: FarmsRepository;
+  invitationRepository: InvitationRepository;
   navigate: (path: string) => void;
 }

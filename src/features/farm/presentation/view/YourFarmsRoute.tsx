@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getCurrentUser, signOut } from '../../../authentication/model/auth_model';
 import { supabaseFarmsRepository } from '../../model/repositories/supabaseFarmsRepository';
+import { InvitationRepositoryImp } from '../../model/repositories/InvitationRepositoryImp';
 import { YourFarmsPage } from './YourFarmPage';
 
 export function YourFarmsRoute() {
@@ -42,6 +43,7 @@ export function YourFarmsRoute() {
     <YourFarmsPage
       deps={{
         repository: supabaseFarmsRepository,
+        invitationRepository: InvitationRepositoryImp,
         navigate,
       }}
       userName={userName}

@@ -11,11 +11,7 @@ export const supabaseFarmsRepository: FarmsRepository = {
 
     return toFarmList(data).farms;
   },
-
-  async getPendingInvitations() {
-    return [];
-  },
-
+  
   async acceptInvitation(invitationId: string) {
     await apiClient.post(
       FarmEndpoints.acceptInvitation(invitationId),

@@ -59,14 +59,7 @@ export interface FarmList {
   quota: FarmQuota | null;
 }
 
-export interface InvitationItem {
-  id: string;
-  farmName: string;
-  location: string;
-  invitedBy: string;
-  role: FarmRole;
-  expiresInDays: number;
-}
+
 
 export type LoadStatus = "loading" | "error" | "ready";
 
