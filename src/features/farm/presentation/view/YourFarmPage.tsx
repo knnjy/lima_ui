@@ -9,6 +9,7 @@ import { FarmsHeader } from "./FarmsHeader";
 import { InvitationsPanel } from "./InvitationPanel";
 import { EmptyFarmsState } from "../components/EmptyFarmState";
 import { useYourFarmsViewModel } from "../viewmodel/useYourFarmsViewModel";
+import FarmCreateView from "./FormView";
 
 interface Props {
   deps: YourFarmsDeps;
@@ -27,7 +28,7 @@ export function YourFarmsPage({ deps, userName, onLogout, helpHref }: Props) {
       footerNote="You can own a farm and work with other farms using the same account."
     >
       <Stack spacing={3}>
-        <FarmsHeader userName={userName} onCreateFarm={vm.createFarm} />
+        <FarmsHeader userName={userName} onCreateFarm={vm.showFarmForm} />
 
         {vm.status === "loading" && (
           <Stack direction="row" spacing={2} alignItems="center" role="status">
@@ -60,13 +61,18 @@ export function YourFarmsPage({ deps, userName, onLogout, helpHref }: Props) {
             )}
 
             {vm.isEmpty ? (
-              <EmptyFarmsState hasInvitations={vm.pendingCount > 0} onCreateFarm={vm.createFarm} />
+              <EmptyFarmsState hasInvitations={vm.pendingCount > 0} onCreateFarm={vm.showFarmForm} />
             ) : (
               <FarmList farms={vm.farms} onOpen={vm.openFarm} />
             )}
           </>
         )}
       </Stack>
+      <FarmCreateView
+        open={vm.farmFormOpen}
+        onClose={vm.hideFarmForm}
+        deps={deps}
+      />
     </AccountLayout>
   );
 }
