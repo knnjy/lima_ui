@@ -9,9 +9,9 @@ import type {
 import type { AnimalGroupRepository } from "./AnimalGroupRepository";
 
 export const supabaseAnimalGroupRepository: AnimalGroupRepository = {
-  getMyAnimalGroups() {
+  getMyAnimalGroups(farmId: string) {
     return apiClient.get<AnimalGroupListApiResponse>(
-      AnimalEndpoints.getGroupList,
+      AnimalEndpoints.getGroupList(farmId),
     );
   },
 

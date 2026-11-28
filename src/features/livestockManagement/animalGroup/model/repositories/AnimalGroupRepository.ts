@@ -6,7 +6,7 @@ import type {
 } from "../entities/AnimalGroup";
 
 export interface AnimalGroupRepository {
-  getMyAnimalGroups(): Promise<AnimalGroupListApiResponse>;
+  getMyAnimalGroups(farmId: string): Promise<AnimalGroupListApiResponse>;
   getAnimalGroup(groupId: string): Promise<AnimalGroupApiResponse>;
   createAnimalGroup(
     payload: CreateAnimalGroupPayload,

@@ -32,13 +32,14 @@ export function AnimalGroupView() {
   const load = useCallback(async () => {
     setStatus("loading");
     try {
-      const result: unknown = await supabaseAnimalGroupRepository.getMyAnimalGroups();
+      const result: unknown =
+        await supabaseAnimalGroupRepository.getMyAnimalGroups(farmId);
       setGroups(readAnimalGroupList(result));
       setStatus("ready");
     } catch {
       setStatus("error");
     }
-  }, []);
+  }, [farmId]);
   const createGroup = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setSaving(true);
