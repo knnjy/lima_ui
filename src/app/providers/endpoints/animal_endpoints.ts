@@ -7,7 +7,7 @@ export class AnimalEndpoints {
   static update = (animalId: string) => `/me/animals/${animalId}`;
 
   // Animal groups
-  static readonly getGroupList = '/me/animal-groups';
+  static getGroupList = (farmId: string) => `/me/animal-groups/${farmId}`;
   static readonly createGroup = '/me/animal-groups';
 
   static getGroupById = (groupId: string) => `/me/animal-groups/${groupId}`;
