@@ -23,6 +23,7 @@ export function useYourFarmsViewModel(deps: YourFarmsDeps) {
   const [invitationsOpen, setInvitationsOpen] = useState(true);
   const [busyIds, setBusyIds] = useState<string[]>([]);
   const [actionError, setActionError] = useState<string | null>(null);
+  const [farmFormOpen, setFarmFormOpen] = useState(false);
 
   const load = useCallback(async () => {
     setStatus("loading");
@@ -80,13 +81,17 @@ export function useYourFarmsViewModel(deps: YourFarmsDeps) {
     invitationsOpen,
     actionError,
     isInvitationBusy: (id: string) => busyIds.includes(id),
+    farmFormOpen,
 
     // actions the View can call
     retry: load,
+    showFarmForm: () => setFarmFormOpen(true),
+    hideFarmForm: () => setFarmFormOpen(false),
     toggleInvitations: () => setInvitationsOpen((open) => !open),
     acceptInvitation: (id: string) => respond(id, "accept"),
     declineInvitation: (id: string) => respond(id, "decline"),
     openFarm: (farmId: string) => navigate(`/farms/${farmId}/dashboard`),
+    openFarmSettings: (farmId: string) => navigate(`/farms/${farmId}/settings`),
     createFarm: () => navigate("/farms/new"),
   };
 }

@@ -1,6 +1,9 @@
+
 export class FarmEndpoints {
   static readonly getList = '/farms';
   static readonly create = '/farms';
+
+  static createFarm = 'farms';
 
   static getById = (farmId: string) => `/farms/${farmId}`;
   static update = (farmId: string) => `/farms/${farmId}`;

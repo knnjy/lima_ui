@@ -6,7 +6,7 @@ export interface FarmLocationApi {
 
 export interface FarmMembershipRoleApi {
   membership_id: string;
-  role_id: number;
+  role_id: number | string;
   role_name: string;
 }
 
@@ -43,6 +43,9 @@ export interface FarmItem {
   id: string;
   name: string;
   location: string; // display text, e.g. "San Jose, Camarines Sur"
+  province?: string;
+  cityMunicipality?: string;
+  addressLine?: string;
   role: FarmRole;
   membershipId: string;
 }
@@ -83,6 +86,9 @@ export const toFarmItem = (api: FarmApiItem): FarmItem => ({
   ]
     .filter(Boolean)
     .join(", "),
+  province: api.location?.province ?? "",
+  cityMunicipality: api.location?.city_municipality ?? "",
+  addressLine: api.location?.address_line ?? "",
   role: toFarmRole(api.role.role_id, api.role.role_name),
   membershipId: api.role.membership_id,
 });
