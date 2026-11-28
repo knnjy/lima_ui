@@ -159,7 +159,7 @@ export function useFarmFormViewModel(deps: FarmFormDeps) {
     setError(null);
   }, [deps.farmId, deps.initialFarm]);
 
-  const submit = useCallback(async (): Promise<FarmItem | null> => {
+  const submit = useCallback(async (): Promise<string | null> => {
     const errors = validate(values);
     setFieldErrors(errors);
     if (Object.keys(errors).length > 0) {
@@ -180,7 +180,7 @@ export function useFarmFormViewModel(deps: FarmFormDeps) {
         };
         const farm = await repository.createFarm(farmData);
         deps.navigate(`/farms/${farm.id}/dashboard`);
-        return farm;
+        return farm.id;
       }
 
       if (!deps.farmId) {
@@ -199,7 +199,7 @@ export function useFarmFormViewModel(deps: FarmFormDeps) {
       };
       const farm = await repository.updateFarm(deps.farmId, farmData);
       deps.navigate(`/farms/${farm.id}/dashboard`);
-      return farm;
+      return farm.id;
     } catch (caught) {
       setError(
         caught instanceof Error

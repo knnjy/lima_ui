@@ -5,9 +5,13 @@ import {
   CardActionArea,
   CardContent,
   Chip,
+  IconButton,
+  Menu,
+  MenuItem,
   Typography,
 } from "@mui/material";
-
+import MoreVertIcon from "@mui/icons-material/MoreVert";
+import { useState } from "react";
 import { tokens } from "../../../../shared/theme/tokens";
 import type { FarmItem } from "../../model/entities/FarmItem";
 import { formatRole } from "../../model/yourFarms.format";
@@ -15,9 +19,15 @@ import { formatRole } from "../../model/yourFarms.format";
 interface Props {
   farms: FarmItem[];
   onOpen: (farmId: string) => void;
+  onSettings: (farmId: string) => void;
 }
 
-export function FarmList({ farms, onOpen }: Props) {
+export function FarmList({ farms, onOpen, onSettings }: Props) {
+  const [menu, setMenu] = useState<{
+    anchor: HTMLElement;
+    farmId: string;
+  } | null>(null);
+
   return (
     <Box
       component="ul"
@@ -42,6 +52,7 @@ export function FarmList({ farms, onOpen }: Props) {
               minHeight: `${tokens.sizes.farmCardMinHeight}px`,
               borderRadius: `${tokens.radius.lg}px`,
               display: "flex",
+              position: "relative",
             }}
           >
             <CardActionArea
@@ -83,9 +94,36 @@ export function FarmList({ farms, onOpen }: Props) {
                 />
               </CardContent>
             </CardActionArea>
+            <IconButton
+              aria-label={`More options for ${farm.name}`}
+              aria-haspopup="menu"
+              onClick={(event) => {
+                event.stopPropagation();
+                setMenu({ anchor: event.currentTarget, farmId: farm.id });
+              }}
+              sx={{ position: "absolute", top: 8, right: 8 }}
+            >
+              <MoreVertIcon />
+            </IconButton>
           </Card>
         </Box>
       ))}
+      <Menu
+        anchorEl={menu?.anchor ?? null}
+        open={Boolean(menu)}
+        onClose={() => setMenu(null)}
+      >
+        <MenuItem
+          onClick={() => {
+            if (menu) {
+              onSettings(menu.farmId);
+            }
+            setMenu(null);
+          }}
+        >
+          Settings
+        </MenuItem>
+      </Menu>
     </Box>
   );
 }

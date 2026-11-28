@@ -1,4 +1,4 @@
-import type { FarmCreate } from "../entities/FarmCreate";
+import type { FarmCreate, FarmCreateResult } from "../entities/FarmCreate";
 import type { FarmUpdate } from "../entities/FarmUpdate";
 import type {
   FarmItem,
@@ -7,7 +7,7 @@ import type { InvitationRepository } from "./InvitationRepository";
 
 export interface FarmsRepository {
   getMyFarms(): Promise<FarmItem[]>;
-  createFarm(farmData: FarmCreate): Promise<FarmItem>;
+  createFarm(farmData: FarmCreate): Promise<FarmCreateResult>;
   getFarmById?(farmId: string): Promise<FarmItem>;
   updateFarm?(farmId: string, farmData: FarmUpdate): Promise<FarmItem>;
 

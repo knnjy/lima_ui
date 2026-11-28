@@ -63,7 +63,11 @@ export function YourFarmsPage({ deps, userName, onLogout, helpHref }: Props) {
             {vm.isEmpty ? (
               <EmptyFarmsState hasInvitations={vm.pendingCount > 0} onCreateFarm={vm.showFarmForm} />
             ) : (
-              <FarmList farms={vm.farms} onOpen={vm.openFarm} />
+              <FarmList
+                farms={vm.farms}
+                onOpen={vm.openFarm}
+                onSettings={vm.openFarmSettings}
+              />
             )}
           </>
         )}

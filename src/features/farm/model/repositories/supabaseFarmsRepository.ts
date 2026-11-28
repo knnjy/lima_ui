@@ -1,6 +1,10 @@
 import { apiClient } from "../../../../app/providers/clients/api_client";
 import { FarmEndpoints } from "../../../../app/providers/endpoints/farm_endpoints";
-import type { FarmCreate } from "../entities/FarmCreate";
+import type {
+  FarmCreate,
+  FarmCreateApiResponse,
+  FarmCreateResult,
+} from "../entities/FarmCreate";
 import type { FarmUpdate } from "../entities/FarmUpdate";
 import {
   toFarmItem,
@@ -12,35 +16,6 @@ import type { FarmsRepository } from "./FarmsRepository";
 
 type FarmApiEnvelope = { data: FarmApiItem };
 
-const isRecord = (value: unknown): value is Record<string, unknown> =>
-  typeof value === "object" && value !== null;
-
-const isFarmApiItem = (value: unknown): value is FarmApiItem => {
-  if (
-    !isRecord(value) ||
-    typeof value.farm_id !== "string" ||
-    typeof value.farm_name !== "string" ||
-    !isRecord(value.role)
-  ) {
-    return false;
-  }
-
-  return (
-    typeof value.role.membership_id === "string" &&
-    (typeof value.role.role_id === "number" ||
-      typeof value.role.role_id === "string") &&
-    typeof value.role.role_name === "string" &&
-    (value.location === null ||
-      (isRecord(value.location) &&
-        (typeof value.location.province === "string" ||
-          value.location.province === null) &&
-        (typeof value.location.city_municipality === "string" ||
-          value.location.city_municipality === null) &&
-        (typeof value.location.address_line === "string" ||
-          value.location.address_line === null)))
-  );
-};
-
 export const supabaseFarmsRepository: FarmsRepository = {
   async getMyFarms() {
     const data = await apiClient.get<FarmListApiResponse>(
@@ -51,23 +26,23 @@ export const supabaseFarmsRepository: FarmsRepository = {
   },
 
   async createFarm(farmData: FarmCreate) {
-    const response = await apiClient.post<unknown>(
+    const response = await apiClient.post<FarmCreateApiResponse>(
       FarmEndpoints.create,
       farmData,
     );
-    const payload =
-      isRecord(response) && "data" in response
-        ? response.data
-        : response;
-    const farm = Array.isArray(payload) ? payload[0] : payload;
 
-    if (!isFarmApiItem(farm)) {
+    if (!response.success) {
+      throw new Error(response.message || "We couldn't create this farm.");
+    }
+
+    if (!response.data?.farm_id) {
       throw new Error(
-        "The farm was created, but the server returned an invalid farm record.",
+        "The farm was created, but the server response didn't include its ID.",
       );
     }
 
-    return toFarmItem(farm);
+    const result: FarmCreateResult = { id: response.data.farm_id };
+    return result;
   },
 
   async getFarmById(farmId: string) {

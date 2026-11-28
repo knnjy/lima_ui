@@ -91,6 +91,7 @@ export function useYourFarmsViewModel(deps: YourFarmsDeps) {
     acceptInvitation: (id: string) => respond(id, "accept"),
     declineInvitation: (id: string) => respond(id, "decline"),
     openFarm: (farmId: string) => navigate(`/farms/${farmId}/dashboard`),
+    openFarmSettings: (farmId: string) => navigate(`/farms/${farmId}/settings`),
     createFarm: () => navigate("/farms/new"),
   };
 }

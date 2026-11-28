@@ -7,3 +7,14 @@ export interface FarmCreate {
   is_active?: boolean;
 }
 
+export interface FarmCreateApiResponse {
+  status: string;
+  success: boolean;
+  message: string;
+  data: { farm_id: string } | null;
+}
+
+export interface FarmCreateResult {
+  id: string;
+}
+
