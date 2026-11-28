@@ -8,8 +8,10 @@ import type {
 import type { AnimalRepository } from "./AnimalRepository";
 
 export const supabaseAnimalRepository: AnimalRepository = {
-  getMyAnimals() {
-    return apiClient.get<AnimalListApiResponse>(AnimalEndpoints.getList);
+  getMyAnimals(farmId: string) {
+    return apiClient.get<AnimalListApiResponse>(
+      AnimalEndpoints.getList(farmId),
+    );
   },
 
   createAnimal(payload: CreateAnimalPayload) {

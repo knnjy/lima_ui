@@ -5,7 +5,7 @@ import type {
 } from "../entities/Animal";
 
 export interface AnimalRepository {
-  getMyAnimals(): Promise<AnimalListApiResponse>;
+  getMyAnimals(farmId: string): Promise<AnimalListApiResponse>;
   createAnimal(payload: CreateAnimalPayload): Promise<AnimalApiResponse>;
 }
 

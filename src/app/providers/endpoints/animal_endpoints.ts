@@ -1,6 +1,6 @@
 export class AnimalEndpoints {
   // Animals
-  static readonly getList = '/me/animals';
+  static getList = (farmId: string) => `/me/animals/${farmId}`;
   static readonly create = '/me/animals';
 
   static getById = (animalId: string) => `/me/animals/${animalId}`;

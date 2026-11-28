@@ -32,13 +32,13 @@ export function AnimalView() {
   const load = useCallback(async () => {
     setStatus("loading");
     try {
-      const result: unknown = await supabaseAnimalRepository.getMyAnimals();
+      const result: unknown = await supabaseAnimalRepository.getMyAnimals(farmId);
       setAnimals(readAnimalList(result));
       setStatus("ready");
     } catch {
       setStatus("error");
     }
-  }, []);
+  }, [farmId]);
   const createAnimal = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setSaving(true);
@@ -83,7 +83,7 @@ export function AnimalView() {
       {status === "loading" && <Stack direction="row" spacing={2} alignItems="center" role="status"><CircularProgress size={20} /><Typography>Loading animals…</Typography></Stack>}
       {status === "error" && <Alert severity="error" action={<Button color="inherit" size="small" onClick={() => void load()}>Try again</Button>}>We couldn't load the animals for your account.</Alert>}
       {status === "ready" && (animals.length === 0 ? <EmptyAnimalState onAddAnimal={() => setAddOpen(true)} /> : <Stack spacing={1.5}>{animals.map((animal, index) => <Paper key={String(animal.animal_id ?? animal.id ?? index)} variant="outlined" sx={{ p: 2, borderRadius: 3 }}><Typography fontWeight={700}>{label(animal)}</Typography><Typography color="text.secondary">{[animal.identifier_number, animal.sex, animal.birth_date].filter(Boolean).join(" · ")}</Typography></Paper>)}</Stack>)}
-      <Dialog open={addOpen} onClose={() => !saving && setAddOpen(false)} fullWidth maxWidth="sm"><DialogTitle>Add an animal</DialogTitle><form onSubmit={createAnimal}><DialogContent><Stack spacing={2} sx={{ pt: 1}}>
+      <Dialog open={addOpen} onClose={() => !saving && setAddOpen(false)} fullWidth maxWidth="sm"><DialogTitle>Add an animal</DialogTitle><form onSubmit={createAnimal}><DialogContent><Stack spacing={2} sx={{ pt: 1 }}>
         <TextField required label="Name" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} />
         <TextField required label="Identifier number" value={form.identifier_number} onChange={(e) => setForm({ ...form, identifier_number: e.target.value })} />
         <TextField required type="number" label="Species ID" value={form.species_id} onChange={(e) => setForm({ ...form, species_id: e.target.value })} />
